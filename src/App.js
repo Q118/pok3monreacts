@@ -75,15 +75,16 @@ function gotoPrevPage() {
     if(loading) return "Loading..."
 
 	return (
-		// pass pokemon down to our pokemon list
+    <>
+		{/* pass pokemon down to our pokemon list */}
 		<PokemonList pokemon={pokemon} />
-
+    
+    {/* pass the functions to it... */}
     <Pagination
-    // pass the functions to it...
     gotoNextPage={gotoNextPage}
     gotoPrevPage={gotoPrevPage}
-
     />
+    </>
 	);
 }
 

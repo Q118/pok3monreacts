@@ -81,8 +81,10 @@ function gotoPrevPage() {
     
     {/* pass the functions to it... */}
     <Pagination
-    gotoNextPage={gotoNextPage}
-    gotoPrevPage={gotoPrevPage}
+    // turnary for the pagnation
+    //if the next page url is true, than pass go to next page, if false- stuff after :
+    gotoNextPage={nextPageUrl ? gotoNextPage : null}
+    gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
     />
     </>
 	);

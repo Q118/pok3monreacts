@@ -1,25 +1,13 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import PokemonList from './PokemonList';
 
 function App() {
+  //set up the initial/current state, starting empty in this case. then the method to update it
+  //default state on the right of =, will show up on first render
+  const [pokemon, setPokemon] = useState(["bulbasaur", "charmander"])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   // pass pokemon down to our pokemon list
+   <PokemonList pokemon={pokemon} />
   );
 }
 

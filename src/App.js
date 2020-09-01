@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import PokemonList from "./PokemonList";
 import axios from "axios";
 import Pagination from "./Pagination";
+import Navbar from "./Navbar";
+import 'bootstrap/dist/css/bootstrap.min.css';
 //axios in order to call api
 
 
@@ -76,6 +78,8 @@ function gotoPrevPage() {
 
 	return (
     <>
+    <Navbar />
+    <div className= "container">
 		{/* pass pokemon down to our pokemon list */}
 		<PokemonList pokemon={pokemon} />
     
@@ -86,6 +90,7 @@ function gotoPrevPage() {
     gotoNextPage={nextPageUrl ? gotoNextPage : null}
     gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
     />
+    </div>
     </>
 	);
 }

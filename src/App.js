@@ -17,12 +17,22 @@ function App() {
   const [nextPageUrl, setNextPageUrl] = useState()
   const [prevPageUrl, setPrevPageUrl] = useState()
 
+  //need to set up the loading screen, true so that by default application is loading
+  const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
+
+    //to reset it each time
+    setLoading(true)
+
 		//this line will make a fetch request and return us a promise
 		  //the promise will have the response for our request variable that gets returned
 		    //the property of 'data' will hold all the json data from the api
 		axios.get(currentPageUrl).then((res) => {
+
+    //set loading to false when rendering is happening 
+    setLoading(false)
+
 
     //grab 'next' variable from the request on the pokeapi site
     setNextPageUrl(res.data.next)
@@ -40,6 +50,8 @@ function App() {
 // in this case we want to change our current url, we want to refetch pokemon.. so gets passed as parameter to use effect
     //so its saying everytime url changes- re render the effect, if it doesnt change, than dont bother doing it
 
+    //show little thing during loading
+    if(loading) return "Loading..."
 
 	return (
 		// pass pokemon down to our pokemon list

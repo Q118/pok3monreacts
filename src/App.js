@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import PokemonList from "./PokemonList";
 import axios from "axios";
+import Pagination from "./Pagination";
 //axios in order to call api
 
 
@@ -60,12 +61,29 @@ function App() {
 // in this case we want to change our current url, we want to refetch pokemon.. so gets passed as parameter to use effect
     //so its saying everytime url changes- re render the effect, if it doesnt change, than dont bother doing it
 
+
+
+function gotoNextPage() {
+  setCurrentPageUrl(nextPageUrl)
+}
+
+function gotoPrevPage() {
+  setCurrentPageUrl(prevPageUrl)
+}
+
     //show little thing during loading
     if(loading) return "Loading..."
 
 	return (
 		// pass pokemon down to our pokemon list
 		<PokemonList pokemon={pokemon} />
+
+    <Pagination
+    // pass the functions to it...
+    gotoNextPage={gotoNextPage}
+    gotoPrevPage={gotoPrevPage}
+
+    />
 	);
 }
 

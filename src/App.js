@@ -5,6 +5,7 @@ import PokemonList from "./PokemonList";
 import axios from "axios";
 //axios in order to call api
 
+
 function App() {
 	//set up the initial/current state, starting empty in this case. then the method to update it
 	//default state on the right of =, will show up on first render
@@ -24,11 +25,16 @@ function App() {
 
     //to reset it each time
     setLoading(true)
+    let cancel;
 
-		//this line will make a fetch request and return us a promise
+
+		//this line below will make a fetch request and return us a promise
 		  //the promise will have the response for our request variable that gets returned
 		    //the property of 'data' will hold all the json data from the api
-		axios.get(currentPageUrl).then((res) => {
+		axios.get(currentPageUrl, {
+      //takes function, the cancel token that we need
+      cancelToken: new axios.CancelToken(c => cancel = c )
+    }).then((res) => {
 
     //set loading to false when rendering is happening 
     setLoading(false)
@@ -42,7 +48,11 @@ function App() {
 			//map through to get name from each one
 			//set pokemon variable to that value
 			setPokemon(res.data.results.map((p) => p.name));
-		});
+    })
+    
+    //make sure we cancel every old request every tiume user makes a new request
+    return () => cancel()
+
 	}, [currentPageUrl]);
 	//we gotta add useEffect (wrap it around)to make this all work properly though
 	//we can run it anytime we want based on the props that we pass it as the second argument
